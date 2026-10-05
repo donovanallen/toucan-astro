@@ -1,0 +1,30 @@
+{
+  "_comment": "Single source of truth for site copy and links. Edit this file to update the site — no markup changes needed. (Portfolio project data lives in portfolio.js.)",
+  "site": {
+    "title": "Donovan Allen",
+    "tagline": "design engineer portfolio",
+    "url": "https://donovanallen.dev",
+    "email": "hello@donovanallen.dev"
+  },
+  "socials": [
+    { "label": "Email Donovan", "icon": "gmail", "href": "mailto:hello@donovanallen.dev", "external": false },
+    { "label": "Donovan Allen on LinkedIn", "icon": "linkedin", "href": "https://www.linkedin.com/in/donovan-allen", "external": true },
+    { "label": "Donovan Allen on GitHub", "icon": "github", "href": "https://www.github.com/donovanallen", "external": true },
+    { "label": "Donovan Allen on Dribbble", "icon": "dribbble", "href": "https://dribbble.com/dnvn", "external": true }
+  ],
+  "home": {
+    "marquee": [
+      "design engineer",
+      "creator",
+      "plant dad",
+      "athlete",
+      "coach",
+      "musician",
+      "third-culture kid"
+    ]
+  },
+  "about": {
+    "greetings": ["hey!", "¡hola!", "sawubona!", "howzit!", "bonjour!", "hallo!", "hej!", "ciao!", "yerrr!"],
+    "bio": "I'm a Frontend + Design Engineer with 10+ years of experience and a proven track record delivering high-impact features driving revenue, enhancing user experience, and improving code resilience and developer experience across a wide range of industries, organizations, and user bases. I'm specialized in rapid prototyping, micro-frontend architecture, design systems and developing advanced, human-centered UI and elevated digital experiences."
+  }
+}

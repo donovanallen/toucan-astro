@@ -1,29 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SiteData from '../data/site.json';
 
-const greetings = [
-  'hey!',
-  '¡hola!',
-  'sawubona!',
-  'howzit!',
-  'bonjour!',
-  'hallo!',
-  'hej!',
-  'ciao!',
-  'yerrr!',
-];
+const greetings = SiteData.about.greetings;
 ---
 
 <Layout title="Donovan Allen" active="about">
   <div class="about-content">
     <div class="about-content-text">
       <h1 class="baffle" id="greeting">hey!</h1>
-      <p>
-        I'm a Frontend + Design Engineer with 10+ years of experience and a proven track record delivering high-impact features
-        driving revenue, enhancing user experience, and improving code resilience and developer experience across a wide range of industries, organizations, and user bases.
-        I'm specialized in rapid prototyping, micro-frontend architecture, design systems and developing advanced, human-centered UI and elevated digital
-        experiences.
-      </p>
+      <p>{SiteData.about.bio}</p>
     </div>
   </div>
 </Layout>

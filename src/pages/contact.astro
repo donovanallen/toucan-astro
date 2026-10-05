@@ -1,5 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SiteData from '../data/site.json';
+
+const socials = SiteData.socials;
+const siteEmail = SiteData.site.email;
 ---
 
 <Layout title="Contact | Donovan Allen" active="contact">
@@ -9,26 +13,18 @@ import Layout from '../layouts/Layout.astro';
     </div>
     <div class="contact-links">
       <div class="icon-grid">
-        <div class="icon-grid-link">
-          <a href="mailto:hello@donovanallen.dev" aria-label="Email Donovan">
-            <img class="icon float-shadow" src="/icons/gmail.svg" alt="" />
-          </a>
-        </div>
-        <div class="icon-grid-link">
-          <a href="https://www.linkedin.com/in/donovan-allen" target="_blank" rel="noopener noreferrer" aria-label="Donovan Allen on LinkedIn">
-            <img class="icon float-shadow" src="/icons/linkedin.svg" alt="" />
-          </a>
-        </div>
-        <div class="icon-grid-link">
-          <a href="https://www.github.com/donovanallen" target="_blank" rel="noopener noreferrer" aria-label="Donovan Allen on GitHub">
-            <img class="icon float-shadow" src="/icons/github.svg" alt="" />
-          </a>
-        </div>
-        <div class="icon-grid-link">
-          <a href="https://dribbble.com/dnvn" target="_blank" rel="noopener noreferrer" aria-label="Donovan Allen on Dribbble">
-            <img class="icon float-shadow" src="/icons/dribbble.svg" alt="" />
-          </a>
-        </div>
+        {socials.map((social) => (
+          <div class="icon-grid-link">
+            <a
+              href={social.href}
+              target={social.external ? '_blank' : undefined}
+              rel={social.external ? 'noopener noreferrer' : undefined}
+              aria-label={social.label}
+            >
+              <img class="icon float-shadow" src={`/icons/${social.icon}.svg`} alt="" />
+            </a>
+          </div>
+        ))}
       </div>
     </div>
   </div>

@@ -1,15 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SiteData from '../data/site.json';
 
-const marqueeList = [
-  'design engineer',
-  'creator',
-  'plant dad',
-  'athlete',
-  'coach',
-  'musician',
-  'third-culture kid',
-];
+const marqueeList = SiteData.home.marquee;
 ---
 
 <Layout>
