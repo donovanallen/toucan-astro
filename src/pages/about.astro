@@ -1,0 +1,87 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const greetings = [
+  'hey!',
+  '¡hola!',
+  'sawubona!',
+  'howzit!',
+  'bonjour!',
+  'hallo!',
+  'hej!',
+  'ciao!',
+  'yerrr!',
+];
+---
+
+<Layout title="Donovan Allen" active="about">
+  <div class="about-content">
+    <div class="about-content-text">
+      <h1 class="baffle" id="greeting">hey!</h1>
+      <p>
+        I'm a Frontend + Design Engineer with 10+ years of experience and a proven track record delivering high-impact features
+        driving revenue, enhancing user experience, and improving code resilience and developer experience across a wide range of industries, organizations, and user bases.
+        I'm specialized in rapid prototyping, micro-frontend architecture, design systems and developing advanced, human-centered UI and elevated digital
+        experiences.
+      </p>
+    </div>
+  </div>
+</Layout>
+
+<script define:vars={{ greetings }}>
+  // Tiny baffle-style text scramble, reimplemented in vanilla JS
+  const chars = '█▓█ ▒░/▒░ █░▒▓/ █▒▒ ▓▒▓/█ ░█▒/ ▒▓░ █<░▒ ▓/░>';
+  const el = document.getElementById('greeting');
+
+  function scramble() {
+    const target = greetings[Math.floor(Math.random() * greetings.length)];
+    const total = Math.max(target.length, el.textContent.length) + 8;
+    let frame = 0;
+    const speed = 40;
+
+    const timer = setInterval(() => {
+      frame++;
+      const progress = frame / total;
+      let out = '';
+      for (let i = 0; i < target.length; i++) {
+        if (i / target.length < progress) {
+          out += target[i];
+        } else {
+          out += chars[Math.floor(Math.random() * chars.length)];
+        }
+      }
+      el.textContent = out;
+      if (frame >= total) {
+        el.textContent = target;
+        clearInterval(timer);
+      }
+    }, speed);
+  }
+
+  scramble();
+  setInterval(scramble, 3000);
+</script>
+
+<style lang="scss" global>
+  @use "../styles/vars" as *;
+  .about-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;
+    padding: 0 var(--space-3xl);
+
+    &-text {
+      text-align: center;
+      text-wrap: pretty;
+      margin: 0 var(--space-lg);
+
+      .baffle {
+        margin-bottom: var(--space-m);
+      }
+    }
+  }
+</style>

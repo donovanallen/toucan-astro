@@ -1,0 +1,127 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const marqueeList = [
+  'design engineer',
+  'creator',
+  'plant dad',
+  'athlete',
+  'coach',
+  'musician',
+  'third-culture kid',
+];
+---
+
+<Layout>
+  <div class="landing">
+    <header class="app-header">
+      <p class="hero-lines">
+        <span class="hero-line">currently lululemon</span>
+        <span class="hero-line">previously Deloitte Digital</span>
+      </p>
+      <svg class="svg-container" viewBox="0 0 152 14" preserveAspectRatio="xMinYMax meet">
+        <text class="svg-text" x="-1.1%" y="100%">
+          donovan
+          <tspan class="landmark">allen</tspan>
+        </text>
+      </svg>
+      <span class="hero-typed-text" id="typed" aria-live="polite"></span>
+    </header>
+  </div>
+</Layout>
+
+<script define:vars={{ marqueeList }}>
+  // Tiny typed-effect marquee (stand-in for react-typed)
+  const el = document.getElementById('typed');
+  let i = Math.floor(Math.random() * marqueeList.length);
+  let dir = 1;
+  let text = '';
+
+  function tick() {
+    const target = marqueeList[i];
+    if (dir === 1) {
+      text = target.slice(0, text.length + 1);
+      el.textContent = text + '_';
+      if (text === target) {
+        dir = -1;
+        setTimeout(tick, 2000); // backDelay
+        return;
+      }
+      setTimeout(tick, 60); // typeSpeed
+    } else {
+      text = target.slice(0, Math.max(0, text.length - 1));
+      el.textContent = text + '_';
+      if (text === '') {
+        dir = 1;
+        i = Math.floor(Math.random() * marqueeList.length); // shuffle next
+        setTimeout(tick, 400);
+        return;
+      }
+      setTimeout(tick, 30); // backSpeed
+    }
+  }
+  tick();
+</script>
+
+<style lang="scss" global>
+  @use "../styles/vars" as *;
+  .landing {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+
+    @media only screen and (max-width: 600px) {
+      justify-content: center;
+      align-items: center;
+    }
+    @media only screen and (min-width: 992px) {
+      justify-content: center;
+    }
+  }
+
+  .app-header {
+    display: flex;
+    flex-direction: column-reverse;
+    width: 100vw;
+
+    .hero-lines {
+      margin: var(--space-m);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3xs);
+
+      .hero-line {
+        font-family: 'TTH-Light';
+        font-size: var(--font-size-sm);
+        letter-spacing: 0.15rem;
+        text-transform: uppercase;
+        color: $dark;
+      }
+    }
+
+    .svg-container {
+      width: 100%;
+
+      .svg-text {
+        font-size: var(--font-size-xxxl);
+        text-transform: uppercase;
+        font-family: 'TTH-SemiBold';
+        fill: $light;
+        .landmark {
+          font-family: 'TTH-ExtraLight';
+          fill: $med;
+        }
+      }
+    }
+
+    .hero-typed-text {
+      margin: var(--space-2xs) var(--space-m);
+      font-family: 'TTH-ExtraLight';
+      font-size: var(--font-size-md);
+      letter-spacing: var(--space-3xs);
+      text-transform: uppercase;
+      color: $dark;
+    }
+  }
+</style>

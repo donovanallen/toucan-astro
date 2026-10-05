@@ -1,0 +1,22 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PortfolioPage from '../components/PortfolioPage.astro';
+import PortfolioData from '../data/portfolio.js';
+
+// NOTE: the React source used stale indices (items[0]/items[1], pointing at
+// Scilent UI / scilent music) — here we resolve the correct item and next project.
+const giftGuideContent = PortfolioData.items.find((i) => i.link === '/holiday-gift-guide');
+const nextPage = PortfolioData.items.find((i) => i.link === '/f1-23');
+---
+
+<Layout title="Holiday Gift Guide | Donovan Allen">
+  <PortfolioPage
+    title={giftGuideContent.title}
+    subtitle={giftGuideContent.subtitle}
+    description={giftGuideContent.description}
+    overview={giftGuideContent.overview}
+    images={giftGuideContent.images}
+    features={giftGuideContent.features}
+    nextPage={nextPage}
+  />
+</Layout>

@@ -1,0 +1,20 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PortfolioPage from '../components/PortfolioPage.astro';
+import PortfolioData from '../data/portfolio.js';
+
+const f123Content = PortfolioData.items.find((i) => i.link === '/f1-23');
+const nextPage = PortfolioData.items.find((i) => i.link === '/scilent-ui');
+---
+
+<Layout title="F1 23 Redesign | Donovan Allen">
+  <PortfolioPage
+    title={f123Content.title}
+    subtitle={f123Content.subtitle}
+    description={f123Content.description}
+    overview={f123Content.overview}
+    images={f123Content.images}
+    features={f123Content.features}
+    nextPage={nextPage}
+  />
+</Layout>

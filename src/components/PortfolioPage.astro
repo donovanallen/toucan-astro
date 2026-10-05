@@ -1,0 +1,161 @@
+---
+// Generic portfolio detail page, ported from portfolio-page.js
+interface Feature {
+  title?: string;
+  description?: string;
+  images: { src: string; alt: string }[];
+}
+interface Props {
+  title: string;
+  subtitle: string;
+  overview?: string;
+  description?: string;
+  skills?: string[];
+  images: { src: string; alt: string }[];
+  features?: Feature[];
+  nextPage?: {
+    title: string;
+    subtitle: string;
+    link: string;
+    images: { src: string; alt: string }[];
+  };
+}
+const { title, subtitle, overview, description, skills, images, features, nextPage } = Astro.props;
+---
+
+<div class="portfolio-page">
+  <div class="portfolio-page-heading">
+    <h2 class="portfolio-page-heading-title">{title}</h2>
+    <p class="portfolio-page-subtitle">{subtitle}</p>
+    {skills && (
+      <ul class="portfolio-page-skills">
+        {skills.map((s) => <li>{s}</li>)}
+      </ul>
+    )}
+  </div>
+
+  {overview && <h5 class="portfolio-page-overview">{overview}</h5>}
+
+  {images[0] && (
+    <img class="portfolio-page-hero-img" src={images[0].src} alt={images[0].alt} />
+  )}
+
+  {description && (
+    <>
+      <h4 class="portfolio-page-desc">{description}</h4>
+      <hr />
+    </>
+  )}
+
+  {images[1] && (
+    <img class="portfolio-page-hero-img" src={images[1].src} alt={images[1].alt} />
+  )}
+
+  {features && features.map((feature) => (
+    <div class="portfolio-page-feature">
+      {feature.title && <h3 class="portfolio-page-feature-title">{feature.title}</h3>}
+      {feature.description && (
+        <p class="portfolio-page-desc portfolio-page-feature-desc">
+          {feature.description}
+        </p>
+      )}
+      {feature.images.map((image) => (
+        <img class="portfolio-page-feature-img" src={image.src} alt={image.alt} />
+      ))}
+    </div>
+  ))}
+
+  {nextPage && (
+    <div class="portfolio-page-footer">
+      <a href={nextPage.link}>
+        <div class="portfolio-page-footer-content">
+          <img
+            class="portfolio-page-footer-image"
+            src={nextPage.images[0].src}
+            alt={nextPage.images[0].alt}
+          />
+          <div class="portfolio-page-footer-title">
+            <span>Next Project</span>
+            <h4>{nextPage.title}</h4>
+            <h5>{nextPage.subtitle}</h5>
+          </div>
+        </div>
+      </a>
+    </div>
+  )}
+</div>
+
+<style lang="scss" global>
+  @use "../styles/vars" as *;
+  .portfolio-page {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    width: 100vw;
+    overflow-y: auto;
+    align-items: center;
+
+    &-heading {
+      align-self: flex-start;
+      margin: var(--space-m);
+
+      .portfolio-page-skills {
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-xs);
+        padding: 0;
+        margin: var(--space-xs) 0 0 0;
+      }
+    }
+    &-overview {
+      align-self: flex-end;
+      margin: var(--space-m);
+      color: $dark;
+    }
+    &-desc {
+      align-self: center;
+      margin: var(--space-m);
+      max-width: 80%;
+      text-align: center;
+      text-wrap: pretty;
+    }
+    &-hero-img {
+      width: 100vw;
+    }
+    &-feature {
+      width: 80vw;
+      &-title {
+        align-self: start;
+        text-align: start;
+      }
+      &-desc {
+        align-self: start;
+        text-align: start;
+      }
+      &-img {
+        width: 100%;
+        margin: 0 auto;
+        border-radius: 32px;
+      }
+    }
+    &-footer {
+      width: 70%;
+      margin-top: var(--space-m);
+      padding: var(--space-s);
+      border-top: 1px solid $light;
+
+      &-content {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: var(--space-s);
+      }
+
+      &-image {
+        max-height: 120px;
+        border-radius: 6px;
+      }
+    }
+  }
+</style>

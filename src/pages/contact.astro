@@ -1,0 +1,85 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Contact | Donovan Allen" active="contact">
+  <div class="contact-content">
+    <div>
+      <h2 class="contact-heading-text">let's connect!</h2>
+    </div>
+    <div class="contact-links">
+      <div class="icon-grid">
+        <div class="icon-grid-link">
+          <a href="mailto:hello@donovanallen.dev" target="_blank">
+            <img class="icon float-shadow" src="/icons/gmail.svg" alt="gmail icon" />
+          </a>
+        </div>
+        <div class="icon-grid-link">
+          <a href="https://www.linkedin.com/in/donovan-allen" target="_blank">
+            <img class="icon float-shadow" src="/icons/linkedin.svg" alt="linkedin icon" />
+          </a>
+        </div>
+        <div class="icon-grid-link">
+          <a href="https://www.github.com/donovanallen" target="_blank">
+            <img class="icon float-shadow" src="/icons/github.svg" alt="github icon" />
+          </a>
+        </div>
+        <div class="icon-grid-link">
+          <a href="https://dribbble.com/dnvn" target="_blank">
+            <img class="icon float-shadow" src="/icons/dribbble.svg" alt="dribbble icon" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style lang="scss" global>
+  @use "../styles/vars" as *;
+  .contact-content {
+    display: flex;
+    flex: 1;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 var(--space-m);
+  }
+
+  .contact-heading-text {
+    margin: 0;
+    flex: 1;
+  }
+
+  .contact-links {
+    display: flex;
+    align-items: center;
+
+    .icon-grid {
+      display: flex;
+      gap: var(--space-l);
+      @media only screen and (max-width: 1200px) {
+        flex-direction: column;
+      }
+
+      .icon-grid-link,
+      .icon {
+        max-height: 50px;
+        width: 50px;
+        @media only screen and (max-width: 990px) {
+          max-height: 35px;
+          width: 35px;
+        }
+      }
+      .icon {
+        filter: invert(11%) sepia(5%) saturate(6405%) hue-rotate(198deg)
+          brightness(90%) contrast(79%);
+        opacity: 0.7;
+        transition: all 0.25s ease;
+
+        &:hover {
+          opacity: 1;
+          transform: scale(1.2);
+        }
+      }
+    }
+  }
+</style>

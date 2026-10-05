@@ -1,0 +1,250 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const conceptPillars = ['music data + visualization', 'social/sharing features', 'new/upcoming releases'];
+const researchFeatures = [
+  {
+    icon: 'activity',
+    title: 'music data + visualization',
+    details: ['platform-agnostic', 'real-time data + insights'],
+  },
+  {
+    icon: 'message',
+    title: 'social/sharing features',
+    details: ['authenticity/verification', 'nuanced music conversation'],
+  },
+  {
+    icon: 'music',
+    title: 'new/upcoming releases',
+    details: ['comprehensive curation', 'release day excitement'],
+  },
+];
+const designMockups = [
+  { src: '/images/sd01/login-mockup.png', alt: 'scilent music login mockup', title: 'Support for multiple streaming sources' },
+  { src: '/images/sd01/profile-mockup.png', alt: 'scilent music profile mockup', title: 'dynamic profile with comprehensive feed of music activity' },
+  { src: '/images/sd01/review-mockup.png', alt: 'scilent music review mockup', title: 'music review functionality supercharged with dynamic, real-time data insights' },
+];
+const protoImages = [
+  { src: '/images/sd01/login-proto.png', alt: 'scilent music login prototype' },
+  { src: '/images/sd01/profile-proto.png', alt: 'scilent music profile prototype' },
+  { src: '/images/sd01/review-proto.png', alt: 'scilent music review prototype' },
+];
+const betaImages = [
+  { src: '/images/sd01/beta-reviews.png', alt: 'scilent music beta review mockup' },
+  { src: '/images/sd01/beta-insights.png', alt: 'scilent music beta insights mockup' },
+  { src: '/images/sd01/beta-releases.png', alt: 'scilent music beta releases mockup' },
+  { src: '/images/sd01/beta-social.png', alt: 'scilent music beta social mockup' },
+];
+---
+
+<Layout title="Scilent Music | Donovan Allen">
+  <div class="scilent-music-page">
+    <h1 class="centered">scilent music</h1>
+    <h3 class="centered">An original music app designed to elevate the listening experience</h3>
+    <img class="hero-img" src="/images/sd01/cover.png" alt="scilent music hero" />
+    <hr />
+
+    <h2>concept</h2>
+    <p class="body-copy">
+      The idea for this project came from my unique combination of passions
+      for music technology, visual and interactive design, and my personal
+      vision for an evolution of the modern digital music consumption
+      landscape. The concept began as application based on three main
+      functional pillars that, when working in concert, can provide a
+      revolution digital music experience for listeners and fans of all types.
+    </p>
+    <ul class="features pillars">
+      <li class="feature">
+        <div class="feature-li">
+          <span class="pillar-plus">+</span>
+          <p>music data + visualization</p>
+        </div>
+      </li>
+      <li class="feature">
+        <div class="feature-li">
+          <span class="pillar-plus">+</span>
+          <p>social/sharing features</p>
+        </div>
+      </li>
+      <li class="feature">
+        <div class="feature-li">
+          <span class="pillar-plus">+</span>
+          <p>new/upcoming releases</p>
+        </div>
+      </li>
+    </ul>
+    <hr />
+
+    <h2>inspo</h2>
+    <h2>/research</h2>
+    <p class="body-copy">
+      Initial research on existing apps, products, services, and user personas
+      in those spaces (as well as drawing on my personal experiences), the
+      following priorities were established:
+    </p>
+
+    <div class="features">
+      {researchFeatures.map((f) => (
+        <div class="feature">
+          <div class="feature-heading">
+            <h3>{f.title}</h3>
+          </div>
+          <ul class="feature-details">
+            {f.details.map((d) => <li><p>{d}</p></li>)}
+          </ul>
+        </div>
+      ))}
+    </div>
+    <hr />
+
+    <h2>design</h2>
+    <p class="body-copy">
+      The visual design of this process included research on relevant existing
+      UI's, creation of rough wireframes, and mockups.
+    </p>
+    <div class="features">
+      {designMockups.map((m) => (
+        <div class="feature media-item">
+          <img src={m.src} alt={m.alt} />
+          <h3>{m.title}</h3>
+        </div>
+      ))}
+    </div>
+    <hr />
+
+    <h2>architecture</h2>
+    <h2>/tech stack</h2>
+    <p class="body-copy">
+      The initial prototype was built for mobile using React Native and the
+      Expo framework, with some basic API integrations with the Spotify Web
+      API, which gave me the opportunity to familiarize myself with native
+      mobile development. After creating a working prototype, work was pivoted
+      to a web version in order to build out more robust features and build on
+      particular data intensive features. This became the foundation for the
+      private and public beta versions to be released soon.
+    </p>
+    <div class="features">
+      {protoImages.map((m) => (
+        <div class="feature media-item">
+          <img src={m.src} alt={m.alt} />
+        </div>
+      ))}
+    </div>
+    <hr />
+
+    <h2>development</h2>
+    <h2>/current state</h2>
+    <p class="body-copy">
+      The beta version of the app was built for web with an emphasis on mobile
+      responsiveness and accessibility, using NextJS, React, TailwindCSS,
+      Vercel, and Prisma, with more advanced data integrations with the
+      Spotify Web API, Musicbrainz API, and Muso.AI.
+    </p>
+    <div class="features">
+      {betaImages.map((m) => (
+        <img src={m.src} alt={m.alt} class="beta-img" />
+      ))}
+    </div>
+    <hr />
+
+    <div class="beta-cta">
+      <h4>Sign up for the beta at:</h4>
+      <a href="https://scilentmusic.com/beta">scilent.music</a>
+    </div>
+  </div>
+</Layout>
+
+<style lang="scss" global>
+  @use "../styles/vars" as *;
+  .scilent-music-page {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    width: 100vw;
+    overflow-y: auto;
+    align-items: center;
+    padding: 0 var(--space-m) var(--space-m) var(--space-m);
+
+    .centered {
+      text-align: center;
+    }
+    .hero-img {
+      width: 90vw;
+      margin: var(--space-m) 0;
+    }
+    .body-copy {
+      max-width: 80%;
+      text-align: center;
+    }
+
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-m);
+      justify-content: center;
+      width: 90vw;
+      list-style: none;
+      padding: 0;
+
+      .feature {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+        .feature-heading h3,
+        h3 {
+          font-size: var(--font-size-sm);
+          margin-bottom: var(--space-xs);
+        }
+        .feature-details {
+          list-style: none;
+          padding: 0;
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-3xs);
+        }
+      }
+
+      .pillars {
+        .feature-li {
+          display: flex;
+          align-items: center;
+          gap: var(--space-3xs);
+        }
+        .pillar-plus {
+          font-family: 'TTH-Light';
+          font-size: var(--font-size-md);
+        }
+      }
+
+      .media-item {
+        img {
+          width: 100%;
+          max-width: 420px;
+          border-radius: 12px;
+          margin-bottom: var(--space-3xs);
+        }
+        max-width: 420px;
+      }
+
+      .beta-img {
+        width: 100%;
+        max-width: 720px;
+        border-radius: 12px;
+      }
+    }
+
+    .beta-cta {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-m);
+      margin-top: var(--space-m);
+
+      a {
+        text-align: center;
+      }
+    }
+  }
+</style>
