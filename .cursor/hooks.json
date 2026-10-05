@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "hooks": {
+    "beforeShellExecution": [
+      {
+        "command": ".cursor/hooks/changeset-reminder.sh",
+        "matcher": "git commit",
+        "failClosed": false
+      }
+    ],
+    "afterFileEdit": [
+      {
+        "command": ".cursor/hooks/format-on-edit.sh",
+        "failClosed": false
+      }
+    ]
+  }
+}
