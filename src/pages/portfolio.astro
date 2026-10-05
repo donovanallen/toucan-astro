@@ -10,11 +10,12 @@ const items = PortfolioData.items;
     {items.map((item, index) => (
       <>
         <div class="portfolio-item">
-          <a href={item.link}>
+          <a href={item.link} aria-label={`${item.title} — ${item.subtitle}`}>
             <img
               src={item.images[0].src}
               alt={item.images[0].alt}
               class="portfolio-item-img"
+              loading={index === 0 ? 'eager' : 'lazy'}
             />
           </a>
           <div class="portfolio-item-text">
@@ -54,15 +55,22 @@ const items = PortfolioData.items;
         scale: 1;
         filter: grayscale(1);
         margin: var(--space-s) 0;
-        transition: all 0.2s ease-in-out;
+        transition:
+          opacity var(--dur-base) var(--ease-out),
+          scale var(--dur-base) var(--ease-out),
+          filter var(--dur-base) var(--ease-out),
+          box-shadow var(--dur-base) var(--ease-out);
 
-        &:hover {
-          opacity: 1;
-          scale: 1.05;
-          box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
-            rgba(0, 0, 0, 0.22) 0px 15px 12px;
-          filter: grayscale(0);
-          border: 0.75px solid $scilentBlack;
+        // Hover transforms only where hover exists — no sticky hover on touch
+        @media (hover: hover) and (pointer: fine) {
+          &:hover {
+            opacity: 1;
+            scale: 1.05;
+            box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+              rgba(0, 0, 0, 0.22) 0px 15px 12px;
+            filter: grayscale(0);
+            border: 0.75px solid $scilentBlack;
+          }
         }
       }
 

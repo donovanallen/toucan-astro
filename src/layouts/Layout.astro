@@ -9,6 +9,7 @@ interface Props {
 const { title = 'Donovan Allen', active = '', bodyClass = '' } = Astro.props;
 const path = Astro.url.pathname;
 const isActive = (href: string) => (path === href ? 'active' : '');
+const siteUrl = 'https://donovanallen.dev';
 ---
 
 <!doctype html>
@@ -20,9 +21,17 @@ const isActive = (href: string) => (path === href ? 'active' : '');
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content="Donovan Allen — design engineer portfolio" />
     <title>{title}</title>
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={`${siteUrl}${path}`} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content="Donovan Allen — design engineer portfolio" />
+    <meta property="og:site_name" content="Donovan Allen" />
+    <meta name="twitter:card" content="summary" />
   </head>
   <body class={bodyClass}>
     <div class="app">
+      <a class="skip-link" href="#main">skip to content</a>
       <nav class="nav-bar">
         <div class="logo">
           <a href="/">da</a>
@@ -32,7 +41,7 @@ const isActive = (href: string) => (path === href ? 'active' : '');
         <a href="/contact" class={`${isActive('/contact')} ${active === 'contact' ? 'active' : ''}`}>contact</a>
       </nav>
 
-      <main class="app-content">
+      <main class="app-content" id="main">
         <slot />
       </main>
 
@@ -43,6 +52,22 @@ const isActive = (href: string) => (path === href ? 'active' : '');
 
 <style lang="scss" global>
   @use "../styles/vars" as *;
+  // Visually hidden until focused — keyboard users' express lane past the nav
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: var(--space-s);
+    z-index: 100;
+    padding: var(--space-2xs) var(--space-s);
+    background: $light;
+    color: $dark;
+    border-radius: 0 0 4px 4px;
+
+    &:focus {
+      top: 0;
+    }
+  }
+
   .nav-bar {
     position: sticky;
     top: 0;
@@ -110,24 +135,5 @@ const isActive = (href: string) => (path === href ? 'active' : '');
     position: sticky;
     bottom: 0;
     padding: 1rem 2rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-
-    .footer-text {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      overflow-x: hidden;
-      cursor: pointer;
-
-      span {
-        color: $scilentGray;
-        font-size: 0.8rem;
-        font-family: 'TTH-Regular';
-        letter-spacing: 0.05rem;
-      }
-    }
   }
 </style>

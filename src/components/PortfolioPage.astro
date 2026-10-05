@@ -48,7 +48,7 @@ const { title, subtitle, overview, description, skills, images, features, nextPa
   )}
 
   {images[1] && (
-    <img class="portfolio-page-hero-img" src={images[1].src} alt={images[1].alt} />
+    <img class="portfolio-page-hero-img" src={images[1].src} alt={images[1].alt} loading="lazy" />
   )}
 
   {features && features.map((feature) => (
@@ -60,7 +60,7 @@ const { title, subtitle, overview, description, skills, images, features, nextPa
         </p>
       )}
       {feature.images.map((image) => (
-        <img class="portfolio-page-feature-img" src={image.src} alt={image.alt} />
+        <img class="portfolio-page-feature-img" src={image.src} alt={image.alt} loading="lazy" />
       ))}
     </div>
   ))}
@@ -73,6 +73,7 @@ const { title, subtitle, overview, description, skills, images, features, nextPa
             class="portfolio-page-footer-image"
             src={nextPage.images[0].src}
             alt={nextPage.images[0].alt}
+            loading="lazy"
           />
           <div class="portfolio-page-footer-title">
             <span>Next Project</span>
@@ -91,7 +92,7 @@ const { title, subtitle, overview, description, skills, images, features, nextPa
     display: flex;
     flex: 1;
     flex-direction: column;
-    width: 100vw;
+    width: 100%;
     overflow-y: auto;
     align-items: center;
 
@@ -121,10 +122,10 @@ const { title, subtitle, overview, description, skills, images, features, nextPa
       text-wrap: pretty;
     }
     &-hero-img {
-      width: 100vw;
+      width: 100%;
     }
     &-feature {
-      width: 80vw;
+      width: min(80vw, 100%);
       &-title {
         align-self: start;
         text-align: start;

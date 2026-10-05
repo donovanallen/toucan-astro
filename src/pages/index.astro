@@ -34,6 +34,13 @@ const marqueeList = [
   let dir = 1;
   let text = '';
 
+  // Reduced motion: show a static role instead of animating
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    el.textContent = marqueeList[i];
+  } else {
+    tick();
+  }
+
   function tick() {
     const target = marqueeList[i];
     if (dir === 1) {
@@ -57,7 +64,6 @@ const marqueeList = [
       setTimeout(tick, 30); // backSpeed
     }
   }
-  tick();
 </script>
 
 <style lang="scss" global>
@@ -80,7 +86,7 @@ const marqueeList = [
   .app-header {
     display: flex;
     flex-direction: column-reverse;
-    width: 100vw;
+    width: 100%;
 
     .hero-lines {
       margin: var(--space-m);

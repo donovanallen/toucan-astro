@@ -1,5 +1,13 @@
 @use "vars" as *;
 
+// Motion tokens (shared vocabulary — extend these, don't invent parallel ones)
+:root {
+  --ease-out: cubic-bezier(0.25, 1, 0.5, 1);
+  --dur-fast: 150ms;
+  --dur-base: 250ms;
+  --dur-slow: 400ms;
+}
+
 @font-face {
   font-family: 'Montserrat';
   src: local('Montserrat'), url('/fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
@@ -97,13 +105,53 @@ body {
       display: none;
     }
   }
+
+  // Keyboard focus: visible, on-brand, never on mouse click
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid $accent;
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
 }
+
+// Page-load reveal: bridges the instant content pop on navigation.
+// CSS-only, transform+opacity only, never blocks interaction.
+.app-content > * {
+  animation: page-reveal var(--dur-slow) var(--ease-out) both;
+}
+
+@keyframes page-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Respect reduced motion: kill decorative animation/transitions, keep function
+@media (prefers-reduced-motion: reduce) {
+  .app-content > * {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 
 .app {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   overflow: hidden;
 }
 

@@ -10,23 +10,23 @@ import Layout from '../layouts/Layout.astro';
     <div class="contact-links">
       <div class="icon-grid">
         <div class="icon-grid-link">
-          <a href="mailto:hello@donovanallen.dev" target="_blank">
-            <img class="icon float-shadow" src="/icons/gmail.svg" alt="gmail icon" />
+          <a href="mailto:hello@donovanallen.dev" aria-label="Email Donovan">
+            <img class="icon float-shadow" src="/icons/gmail.svg" alt="" />
           </a>
         </div>
         <div class="icon-grid-link">
-          <a href="https://www.linkedin.com/in/donovan-allen" target="_blank">
-            <img class="icon float-shadow" src="/icons/linkedin.svg" alt="linkedin icon" />
+          <a href="https://www.linkedin.com/in/donovan-allen" target="_blank" rel="noopener noreferrer" aria-label="Donovan Allen on LinkedIn">
+            <img class="icon float-shadow" src="/icons/linkedin.svg" alt="" />
           </a>
         </div>
         <div class="icon-grid-link">
-          <a href="https://www.github.com/donovanallen" target="_blank">
-            <img class="icon float-shadow" src="/icons/github.svg" alt="github icon" />
+          <a href="https://www.github.com/donovanallen" target="_blank" rel="noopener noreferrer" aria-label="Donovan Allen on GitHub">
+            <img class="icon float-shadow" src="/icons/github.svg" alt="" />
           </a>
         </div>
         <div class="icon-grid-link">
-          <a href="https://dribbble.com/dnvn" target="_blank">
-            <img class="icon float-shadow" src="/icons/dribbble.svg" alt="dribbble icon" />
+          <a href="https://dribbble.com/dnvn" target="_blank" rel="noopener noreferrer" aria-label="Donovan Allen on Dribbble">
+            <img class="icon float-shadow" src="/icons/dribbble.svg" alt="" />
           </a>
         </div>
       </div>
@@ -73,12 +73,24 @@ import Layout from '../layouts/Layout.astro';
         filter: invert(11%) sepia(5%) saturate(6405%) hue-rotate(198deg)
           brightness(90%) contrast(79%);
         opacity: 0.7;
-        transition: all 0.25s ease;
+        transition:
+          opacity var(--dur-base) var(--ease-out),
+          transform var(--dur-base) var(--ease-out);
 
-        &:hover {
-          opacity: 1;
-          transform: scale(1.2);
+        // Hover transforms only where hover exists — no sticky hover on touch
+        @media (hover: hover) and (pointer: fine) {
+          &:hover {
+            opacity: 1;
+            transform: scale(1.2);
+          }
         }
+      }
+
+      // Press feedback, any pointer type
+      .icon-grid-link:active .icon {
+        opacity: 1;
+        transform: scale(0.95);
+        transition-duration: var(--dur-fast);
       }
     }
   }

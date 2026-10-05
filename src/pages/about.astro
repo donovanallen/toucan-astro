@@ -58,8 +58,11 @@ const greetings = [
     }, speed);
   }
 
-  scramble();
-  setInterval(scramble, 3000);
+  // Reduced motion: static greeting, no scramble loop
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    scramble();
+    setInterval(scramble, 3000);
+  }
 </script>
 
 <style lang="scss" global>
@@ -77,7 +80,7 @@ const greetings = [
     &-text {
       text-align: center;
       text-wrap: pretty;
-      margin: 0 var(--space-lg);
+      margin: 0 var(--space-l);
 
       .baffle {
         margin-bottom: var(--space-m);
