@@ -36,8 +36,9 @@ pattern (the legacy code had a stale-index bug we fixed).
 - GitHub: `donovanallen/toucan-astro` (public)
 - Vercel project **toucan-astro** (team `scilent-digitals-projects`), framework preset `astro`,
   deployment protection disabled
-- donovanallen.dev still points at Firebase Hosting — DNS cutover to Vercel is pending and is a
-  prod-affecting action requiring Donovan's explicit go
+- DNS cutover from Firebase Hosting to Vercel is COMPLETE (verified Oct 2026): apex 308s to www,
+  both serve the Astro site with Vercel headers. Firebase/toucan-react remain as a read-only
+  rollback path — do not modify them.
 
 ## Rules of engagement
 

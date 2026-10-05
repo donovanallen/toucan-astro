@@ -1,43 +1,73 @@
-# Astro Starter Kit: Minimal
+# donovanallen.dev — source
 
-```sh
-npm create astro@latest -- --template minimal
-```
+The source code for [donovanallen.dev](https://donovanallen.dev), Donovan Allen's personal
+portfolio site. Plain **Astro**, statically built, no framework UI layer, no backend, no
+database. Content and layout live in a handful of small files, so updating the site is
+close to editing text.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Stack
 
-## 🚀 Project Structure
+- [Astro](https://docs.astro.build) — static output (`output: 'static'`), file-based routing
+- **SCSS** for styling — design tokens (palette, Utopia fluid type/spacing scale) in
+  `src/styles/_vars.scss`, shared rules in `src/styles/global.scss`
+- **Vanilla inline JS only** — two tiny scripts (typed marquee on the landing page,
+  scramble greeting on /about); no component frameworks
+- Self-hosted fonts (`public/fonts`) — TT-Hoves + Montserrat variable
+- Deployed on [Vercel](https://vercel.com) (project `toucan-astro`); pushes to `main`
+  auto-deploy to production
 
-Inside of your Astro project, you'll see the following folders and files:
+## Editing content (no code changes needed)
+
+Site copy and links are data, not markup:
+
+- **`src/data/site.json`** — site title/tagline, contact email, social links, the
+  landing-page marquee words, the /about greetings list, and the bio paragraph
+- **`src/data/portfolio.js`** — portfolio project data (titles, subtitles, overviews,
+  skills, images, page ordering)
+
+Edit either file and push — Vercel rebuilds and the change is live in under a minute.
+Images for portfolio pages live in `public/images/<project>/`.
+
+## Project structure
 
 ```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+src/
+  data/           # site.json + portfolio.js — the content source of truth
+  layouts/        # Layout.astro — nav, footer, meta/OG tags, skip link
+  pages/          # /, /about, /contact, /portfolio + 4 portfolio detail pages
+  components/     # PortfolioPage.astro — shared portfolio detail layout
+  styles/         # _vars.scss (tokens), global.scss (base styles)
+public/
+  fonts/          # self-hosted TT-Hoves + Montserrat
+  images/         # portfolio imagery
+  icons/          # contact-page social icons
+.cursor/          # agent tooling: rules, skills, commands (see AGENTS.md)
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Development
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+| Command           | Action                                   |
+| :---------------- | :--------------------------------------- |
+| `npm install`     | Install dependencies (Node >= 22.12)     |
+| `npm run dev`     | Local dev server at `localhost:4321`     |
+| `npm run build`   | Production build to `./dist/`            |
+| `npm run preview` | Preview the production build locally     |
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Versioning
 
-## 🧞 Commands
+Managed with [Changesets](https://github.com/changesets/changesets). To release:
 
-All commands are run from the root of the project, from a terminal:
+```sh
+npx changeset            # describe your change, pick a semver bump
+npx changeset version    # consume changesets → bumps package.json + CHANGELOG.md
+```
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+The site footer reads the version from `package.json` at build time — bump it, build,
+and the new version appears on the site.
 
-## 👀 Want to learn more?
+## Conventions
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Agent-facing rules (visual identity, deploy gates, rules of engagement) are in
+[AGENTS.md](AGENTS.md) and `.cursor/`. Key ones: don't push to `main` without
+Donovan's go; preserve the misty blue-gray palette / TT-Hoves / uppercase identity;
+keep the JS surface tiny.
