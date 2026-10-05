@@ -9,7 +9,7 @@ const items = PortfolioData.items;
   <div class="container">
     {items.map((item, index) => (
       <>
-        <div class="portfolio-item">
+        <div class="portfolio-item" style={`animation-delay: ${index * 60}ms`}>
           <a href={item.link} aria-label={`${item.title} — ${item.subtitle}`}>
             <img
               src={item.images[0].src}
@@ -47,6 +47,9 @@ const items = PortfolioData.items;
     .portfolio-item {
       margin: 0 auto;
       width: 70%;
+
+      // Staggered group entrance (occasional page, 60ms steps)
+      animation: page-reveal var(--dur-slow) var(--ease-out) both;
 
       &-img {
         width: 100%;
